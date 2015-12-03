@@ -4,10 +4,10 @@
 using namespace std;
 
 int main() {
-    SmartPointer<vector<int>> p(new vector<int>);
-    for(int i = 0; i < 10; ++i) {
-        p->push_back(10);
-    }
+    SmartPointer<vector<int>> p(new vector<int>[3], [] (vector<int> *v) {
+        delete [] v;
+    });
     SmartPointer<vector<int>> q = p;
-    cout << (*q).size();
+    q->push_back(10);
+    cout << p->size();
 }
