@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=SmartPointer
+PROJECTNAME=Cpp-SmartPointers
 
 # Active Configuration
 DEFAULTCONF=Debug

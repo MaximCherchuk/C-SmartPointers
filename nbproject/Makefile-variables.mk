@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=smartpointer
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/smartpointer
+CND_ARTIFACT_NAME_Debug=cpp-smartpointers
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/cpp-smartpointers
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=smartpointer.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/smartpointer.tar
+CND_PACKAGE_NAME_Debug=cpp-smartpointers.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/cpp-smartpointers.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=smartpointer
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/smartpointer
+CND_ARTIFACT_NAME_Release=cpp-smartpointers
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/cpp-smartpointers
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=smartpointer.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/smartpointer.tar
+CND_PACKAGE_NAME_Release=cpp-smartpointers.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/cpp-smartpointers.tar
 #
 # include compiler specific variables
 #
