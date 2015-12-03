@@ -10,7 +10,6 @@
 template<typename value_type, typename counter_type = unsigned int>
 class SmartPointer {
 public:
-    SmartPointer();
     SmartPointer(value_type*);
     SmartPointer(const SmartPointer<value_type, counter_type>& copy);
     ~SmartPointer();
@@ -18,16 +17,10 @@ public:
     value_type& operator * ();
     value_type* operator -> ();
 private:
+    SmartPointer() = delete;
     value_type *pointer;
     ReferenceCounter<counter_type> counter;
 };
-
-template<typename value_type, typename counter_type> 
-SmartPointer<value_type, counter_type>::SmartPointer() 
-        : pointer(nullptr), counter(ReferenceCounter<counter_type>()) 
-{
-}
-
 
 template<typename value_type, typename counter_type> 
 SmartPointer<value_type, counter_type>::SmartPointer(value_type *value) 
