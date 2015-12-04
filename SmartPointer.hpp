@@ -2,85 +2,85 @@
  * @Compiler: g++ 4.8.2 (C++11 standard)
  */
 
-#ifndef SMARTPOINTER_HPP
-#define	SMARTPOINTER_HPP
+#ifndef SMART_PTR_HPP
+#define	SMART_PTR_HPP
 
 #include "ReferenceCounter.hpp"
 
-template<typename value_type, typename counter_type = unsigned int>
-class SmartPointer {
+template<typename value_t, typename counter_t = unsigned int>
+class smart_ptr {
 public:
-    SmartPointer(value_type*);
-    SmartPointer(value_type*, std::function<void(value_type*)>);
-    SmartPointer(const SmartPointer<value_type, counter_type>& copy);
-    ~SmartPointer();
-    SmartPointer& operator = (const SmartPointer<value_type, counter_type>& another);
-    value_type& operator * ();
-    value_type* operator -> ();
+    smart_ptr(value_t*);
+    smart_ptr(value_t*, std::function<void(value_t*)>);
+    smart_ptr(const smart_ptr<value_t, counter_t>& copy);
+    ~smart_ptr();
+    smart_ptr& operator = (const smart_ptr<value_t, counter_t>& other);
+    value_t& operator * ();
+    value_t* operator -> ();
 private:
-    SmartPointer() = delete;
-    value_type *pointer;
-    ReferenceCounter<counter_type> counter;
-    std::function<void(value_type*)> deleter;
+    smart_ptr() = delete;
+    value_t *pointer;
+    ref_counter<counter_t> counter;
+    std::function<void(value_t*)> deleter;
 };
 
-template<typename value_type, typename counter_type> 
-SmartPointer<value_type, counter_type>::SmartPointer(value_type *value) 
-        : pointer(value), counter(ReferenceCounter<counter_type>())
+template<typename value_t, typename counter_t> 
+smart_ptr<value_t, counter_t>::smart_ptr(value_t *value) 
+        : pointer(value), counter(ref_counter<counter_t>())
 {
-    counter.addReference();
-    deleter = [&] (value_type *point = pointer) -> void { 
+    counter.add_ref();
+    deleter = [&] (value_t *point = pointer) -> void { 
         delete pointer; 
     };
 }
 
-template<typename value_type, typename counter_type> 
-SmartPointer<value_type, counter_type>::
-SmartPointer(value_type *value, std::function<void(value_type*)> deleter) 
-        : pointer(value), counter(ReferenceCounter<counter_type>())
+template<typename value_t, typename counter_t> 
+smart_ptr<value_t, counter_t>::
+    smart_ptr(value_t *value, std::function<void(value_t*)> deleter) 
+        : pointer(value), counter(ref_counter<counter_t>())
 {
-    counter.addReference();
+    counter.add_ref();
     this->deleter = deleter;
 }
 
-template<typename value_type, typename counter_type> 
-SmartPointer<value_type, counter_type>::
-    SmartPointer(const SmartPointer<value_type, counter_type>& smart_pointer) 
+template<typename value_t, typename counter_t> 
+smart_ptr<value_t, counter_t>::
+    smart_ptr(const smart_ptr<value_t, counter_t>& smart_pointer) 
     : pointer(smart_pointer.pointer), counter(smart_pointer.counter),
       deleter(smart_pointer.deleter)
 {
-    counter.addReference();
+    counter.add_ref();
 }
 
-template<typename value_type, typename counter_type> 
-SmartPointer<value_type, counter_type>::~SmartPointer() {
-    if(counter.deleteReference() == 0) {
+template<typename value_t, typename counter_t> 
+smart_ptr<value_t, counter_t>::~smart_ptr() {
+    if(counter.delete_ref() == 0) {
         deleter(pointer);
     }
 }
 
-template<typename value_type, typename counter_type> 
-value_type& SmartPointer<value_type, counter_type>::operator *() {
+template<typename value_t, typename counter_t> 
+value_t& smart_ptr<value_t, counter_t>::operator *() {
     return *pointer;
 }
 
-template<typename value_type, typename counter_type> 
-value_type* SmartPointer<value_type, counter_type>::operator -> () {
+template<typename value_t, typename counter_t> 
+value_t* smart_ptr<value_t, counter_t>::operator -> () {
     return pointer;
 }
 
-template<typename value_type, typename counter_type> 
-SmartPointer<value_type, counter_type>& SmartPointer<value_type, counter_type>::
-               operator = (const SmartPointer<value_type,counter_type>& another) 
+template<typename value_t, typename counter_t> 
+smart_ptr<value_t, counter_t>& smart_ptr<value_t, counter_t>::
+    operator = (const smart_ptr<value_t, counter_t>& other) 
 {
-    if(this == &another) return *this;
-    if(counter.deleteReference() == 0) {
+    if(this == &other) return *this;
+    if(counter.delete_ref() == 0) {
         deleter(pointer);
     }
-    pointer = another.pointer;
-    counter = another.counter;
-    deleter = another.deleter;
-    counter.addReference();
+    pointer = other.pointer;
+    counter = other.counter;
+    deleter = other.deleter;
+    counter.add_ref();
     return *this;
 }
-#endif	/* SMARTPOINTER_HPP */
+#endif	/* SMART_PTR_HPP */

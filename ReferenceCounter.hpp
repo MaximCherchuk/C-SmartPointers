@@ -1,44 +1,44 @@
-#ifndef REFERENCECOUNTER_HPP
-#define	REFERENCECOUNTER_HPP
+#ifndef REF_COUNTER_HPP
+#define	REF_COUNTER_HPP
 
 template<typename type>
-class ReferenceCounter {
+class ref_counter {
 public:
-    ReferenceCounter();
-    ReferenceCounter(const ReferenceCounter<type> &cnt);
-    ReferenceCounter(const ReferenceCounter<type> &&cnt);
-    inline void addReference();
-    inline int deleteReference();
-    ~ReferenceCounter();
+    ref_counter();
+    ref_counter(const ref_counter<type> &cnt);
+    ref_counter(const ref_counter<type> &&cnt);
+    inline void add_ref();
+    inline int delete_ref();
+    ~ref_counter();
 private:
     type count;
 };
 
 template<typename type>
-ReferenceCounter<type>::ReferenceCounter() : count(type()) {
+ref_counter<type>::ref_counter() : count(type()) {
 }
 
 template<typename type>
-ReferenceCounter<type>::ReferenceCounter(const ReferenceCounter<type> &cnt) 
+ref_counter<type>::ref_counter(const ref_counter<type> &cnt) 
     : count(cnt.count) {
 }
 
 template<typename type>
-ReferenceCounter<type>::ReferenceCounter(const ReferenceCounter<type> &&cnt)
+ref_counter<type>::ref_counter(const ref_counter<type> &&cnt)
     : count(std::move(cnt.count)) {}
 
 template<typename type>
-inline void ReferenceCounter<type>::addReference() {
+inline void ref_counter<type>::add_ref() {
     ++count;
 }
 
 template<typename type>
-inline int ReferenceCounter<type>::deleteReference() {
+inline int ref_counter<type>::delete_ref() {
     return --count;
 }
 
 template<typename type>
-ReferenceCounter<type>::~ReferenceCounter() {
+ref_counter<type>::~ref_counter() {
 }
 
-#endif	/* REFERENCECOUNTER_HPP */
+#endif	/* REF_COUNTER_HPP */
