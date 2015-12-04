@@ -5,7 +5,7 @@
 #ifndef SMART_PTR_HPP
 #define	SMART_PTR_HPP
 
-#include "ReferenceCounter.hpp"
+#include "ref_counter.hpp"
 
 template<typename value_t, typename counter_t = unsigned int>
 class smart_ptr {

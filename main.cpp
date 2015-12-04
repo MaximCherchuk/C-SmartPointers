@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "SmartPointer.hpp"
+#include "smart_ptr.hpp"
 
 using namespace std;
 
