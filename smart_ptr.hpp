@@ -7,6 +7,8 @@
 
 #include "ref_counter.hpp"
 
+namespace htop {
+
 template<typename value_t, typename counter_t = unsigned int>
 class smart_ptr {
 public:
@@ -15,8 +17,9 @@ public:
     smart_ptr(const smart_ptr<value_t, counter_t>& copy);
     ~smart_ptr();
     smart_ptr& operator = (const smart_ptr<value_t, counter_t>& other);
-    value_t& operator * ();
+    value_t& operator *  ();
     value_t* operator -> ();
+    value_t& operator [] (const size_t index);
 private:
     smart_ptr() = delete;
     value_t *pointer;
@@ -82,5 +85,14 @@ smart_ptr<value_t, counter_t>& smart_ptr<value_t, counter_t>::
     deleter = other.deleter;
     counter.add_ref();
     return *this;
+}
+
+template<typename value_t, typename counter_t> 
+value_t& smart_ptr<value_t, counter_t>::
+    operator [] (const size_t index)
+{
+        return pointer[index];
+}
+
 }
 #endif	/* SMART_PTR_HPP */

@@ -1,6 +1,8 @@
 #ifndef REF_COUNTER_HPP
 #define	REF_COUNTER_HPP
 
+namespace htop {
+
 template<typename type>
 class ref_counter {
 public:
@@ -41,4 +43,5 @@ template<typename type>
 ref_counter<type>::~ref_counter() {
 }
 
+}
 #endif	/* REF_COUNTER_HPP */
